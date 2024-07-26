@@ -6,10 +6,36 @@ const growthChart = new Chart(ctx, {
         datasets: [
             {
                 label: '97th Percentile',
-                data: [50],
+                data: [
+                    { x: 3,y:45 },
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                 
+                  
+                ], 
                 borderColor: 'rgba(255, 159, 64, 1)',
                 fill: false
-            }
+            },
+            {
+                label: 'prueba 2',
+                data: [
+                    {y:125 , x:2},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                    { x: 1.5,y:50},
+                 
+                  
+                ], 
+                borderColor: 'rgba(255, 159, 64, 1)',
+                fill: false
+            },
+            
+            
         ]
     },
     options: {
