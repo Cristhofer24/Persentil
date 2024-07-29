@@ -55,13 +55,19 @@ function calcularIMC() {
 
      // Actualizar el gráfico con el nuevo punto
      const edadAnios = document.getElementById('edad').value;
-     const edadMeses = document.getElementById('meses').value;
-     const altura = talla; // Suponemos que la talla es igual a la altura para este caso
+    const edadMeses = document.getElementById('meses').value;
+    const altura = talla;// Suponemos que la talla es igual a la altura para este caso
  
+  
      actualizarGrafico(parseInt(edadAnios), parseFloat(altura));
      if (typeof window.actualizarPunto === 'function') {
-        window.actualizarPunto(edad, altura);
-    }
+         window.actualizarPunto(edad, altura);
+     }
+ 
+    //  if (typeof window.actualizarPuntoX === 'function') {
+    //      window.actualizarPuntoX(edad, altura);
+    //  }
+ 
 }
 
 // // Función para actualizar el gráfico en persentil.js
@@ -70,9 +76,9 @@ function calcularIMC() {
 //         window.actualizarPunto(edadAnios, altura);
 //     }
 // }
-function actualizarGrafico(edadAnios, altura) {
-    if (typeof window.actualizarPunto === 'function') {
-        window.actualizarPunto(edadAnios, altura);
-    }
-}
+// function actualizarGrafico(edadAnios, altura) {
+//     if (typeof window.actualizarPunto === 'function') {
+//         window.actualizarPunto(edadAnios, altura);
+//     }
+// }
 
