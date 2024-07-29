@@ -19,6 +19,7 @@ const growthChart = new Chart(ctx, {
                 ],
                 showLine: true,
                 fill: false,
+                tension:0.2,
                 pointRadius: 0
             },
             {
@@ -35,6 +36,7 @@ const growthChart = new Chart(ctx, {
                 ],
                 showLine: true,
                 fill: false,
+                tension:0.2,
                 pointRadius: 0
             },
             {
@@ -51,6 +53,7 @@ const growthChart = new Chart(ctx, {
                 ],
                 showLine: true,
                 fill: false,
+                tension:0.2,
                 pointRadius: 0
             },
             {
@@ -67,6 +70,7 @@ const growthChart = new Chart(ctx, {
                 ],
                 showLine: true,
                 fill: false,
+                tension:0.2,
                 pointRadius: 0
             },
             {
@@ -83,8 +87,10 @@ const growthChart = new Chart(ctx, {
                 ],
                 showLine: true,
                 fill: false,
+                tension:0.2,
                 pointRadius: 0
             },
+           
             {
                 label: 'Punto Calculado',
                 borderColor: 'blue',
