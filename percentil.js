@@ -21,7 +21,6 @@ const growthChart = new Chart(ctx, {
                 fill: false,
                 pointRadius: 0
             },
-            // Otros datasets aquí...
             {
                 label: 'Red',
                 borderColor: 'red',
@@ -34,7 +33,7 @@ const growthChart = new Chart(ctx, {
                     { x: 4, y: 112 },
                     { x: 5, y: 119.5 }
                 ],
-                showLine: true, // Mostrar línea
+                showLine: true,
                 fill: false,
                 pointRadius: 0
             },
@@ -50,7 +49,7 @@ const growthChart = new Chart(ctx, {
                     { x: 4, y: 103.5 },
                     { x: 5, y: 110 }
                 ],
-                showLine: true, // Mostrar línea
+                showLine: true,
                 fill: false,
                 pointRadius: 0
             },
@@ -66,7 +65,7 @@ const growthChart = new Chart(ctx, {
                     { x: 4, y: 95 },
                     { x: 5, y: 101 }
                 ],
-                showLine: true, // Mostrar línea
+                showLine: true,
                 fill: false,
                 pointRadius: 0
             },
@@ -82,7 +81,7 @@ const growthChart = new Chart(ctx, {
                     { x: 4, y: 91 },
                     { x: 5, y: 96 }
                 ],
-                showLine: true, // Mostrar línea
+                showLine: true,
                 fill: false,
                 pointRadius: 0
             },
@@ -95,15 +94,6 @@ const growthChart = new Chart(ctx, {
                 pointRadius: 5,
                 pointBackgroundColor: 'blue'
             },
-            // {
-            //     label: 'Punto en X',
-            //     borderColor: 'green',
-            //     borderWidth: 2,
-            //     data: [],
-            //     showLine: false,
-            //     pointRadius: 5,
-            //     pointBackgroundColor: 'green'
-            // }
         ]
     },
     options: {
@@ -117,9 +107,11 @@ const growthChart = new Chart(ctx, {
                 type: 'linear',
                 position: 'bottom',
                 ticks: {
-                    stepSize: 0.1, // Mostrar valores decimales
+                    stepSize: 0.1,
+                    // Paso para los ticks
                     callback: function(value) {
-                        return value.toFixed(1);//muestra el numero de decimales
+                        // Mostrar valores con un decimal
+                        return value.toFixed(1);
                     }
                 },
                 grid: {
@@ -129,17 +121,30 @@ const growthChart = new Chart(ctx, {
                     drawTicks: true,
                     lineWidth: 1,
                     color: function(context) {
-                        if (context.tick.value % 1 === 0){
-                            return '#000';
-                        }
-                        return '#aaa'; // Línea principal para años y secundaria para meses
+                        const tickValue = context.tick.value;
+                        // Diferenciar líneas de años y meses
+                        return tickValue % 1 === 0 ? '#000' : '#aaa'; // Línea negra para años, gris claro para meses
                     }
-                }
+                },
             },
             y: {
                 title: {
                     display: true,
                     text: 'Longitud/Estatura (cm)'
+                },
+                ticks: {
+                    stepSize: 5,
+                    callback: function(value) {
+                        return Number.isInteger(value) ? value : '';
+                    }
+                },
+                min: 40,
+                max: 125
+            },
+            y1: {
+                position:'right',
+                title: {
+                    display: true,
                 },
                 ticks: {
                     stepSize: 5,
@@ -155,7 +160,8 @@ const growthChart = new Chart(ctx, {
 });
 
 // Función para actualizar el gráfico con un nuevo punto
-function actualizarGrafico(edad, altura) {
+function actualizarGrafico(edadAnios, altura, edadMeses) {
+    const edad = edadAnios + (edadMeses / 12);
     const nuevoPunto = { x: edad, y: altura };
 
     // Encuentra el dataset 'Punto Calculado' y añade el nuevo punto
@@ -163,13 +169,5 @@ function actualizarGrafico(edad, altura) {
     datasetPuntoCalculado.data = [nuevoPunto];
 
     // Actualizar el gráfico
-    growthChart.update();
-}
-
-// Función para actualizar el gráfico con el punto en el eje X
-function actualizarPuntoX(edad, altura) {
-    const nuevoPuntoX = { x: edad, y: altura };
-    const datasetPuntoX = growthChart.data.datasets.find(ds => ds.label === 'Punto en X');
-    datasetPuntoX.data = [nuevoPuntoX];
     growthChart.update();
 }

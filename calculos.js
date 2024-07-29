@@ -21,10 +21,11 @@ function calcularIMC() {
     let peso = parseFloat(document.getElementById('peso').value);
     let talla = parseFloat(document.getElementById('talla').value);
     let hemoglobina = parseFloat(document.getElementById('hemog').value);
-    let edad = parseInt(document.getElementById('edad').value);
+    let edadAnios = parseInt(document.getElementById('edad').value);
+    let edadMeses = parseInt(document.getElementById('meses').value);
 
     // Validar que los valores ingresados sean numéricos y mayores que cero
-    if (isNaN(peso) || isNaN(talla) || isNaN(hemoglobina) || isNaN(edad) || peso <= 0 || talla <= 0 || hemoglobina <= 0 || edad <= 0) {
+    if (isNaN(peso) || isNaN(talla) || isNaN(hemoglobina) || isNaN(edadAnios) || peso <= 0 || talla <= 0 || hemoglobina <= 0 || edadAnios <= 0) {
         document.getElementById('IMC').value = 'Por favor ingresar valores válidos para la edad, peso, talla y la hemoglobina.';
         return;
     }
@@ -46,39 +47,16 @@ function calcularIMC() {
     }
 
     // Determinar si hay anemia basado en los niveles de hemoglobina
-    if (edad < 6 && hemoglobina < 11.0) {
+    if (edadAnios < 6 && hemoglobina < 11.0) {
         mensaje += ` Además, con un nivel de hemoglobina de ${hemoglobina}, se indica anemia.`;
     }
 
     // Mostrar el mensaje en el textarea
     document.getElementById('IMC').value = mensaje;
 
-     // Actualizar el gráfico con el nuevo punto
-     const edadAnios = document.getElementById('edad').value;
-    const edadMeses = document.getElementById('meses').value;
-    const altura = talla;// Suponemos que la talla es igual a la altura para este caso
- 
-  
-     actualizarGrafico(parseInt(edadAnios), parseFloat(altura));
-     if (typeof window.actualizarPunto === 'function') {
-         window.actualizarPunto(edad, altura);
-     }
- 
-    //  if (typeof window.actualizarPuntoX === 'function') {
-    //      window.actualizarPuntoX(edad, altura);
-    //  }
- 
+    // Calcular la edad en años y meses
+    const edad = edadAnios + (edadMeses / 12);
+
+    // Actualizar el gráfico con el nuevo punto
+    actualizarGrafico(edadAnios, talla, edadMeses);
 }
-
-// // Función para actualizar el gráfico en persentil.js
-// function actualizarGrafico(edadAnios, altura) {
-//     if (typeof window.actualizarPunto === 'function') {
-//         window.actualizarPunto(edadAnios, altura);
-//     }
-// }
-// function actualizarGrafico(edadAnios, altura) {
-//     if (typeof window.actualizarPunto === 'function') {
-//         window.actualizarPunto(edadAnios, altura);
-//     }
-// }
-
