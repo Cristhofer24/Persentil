@@ -7,7 +7,7 @@ const growthChart = new Chart(ctx, {
             // Líneas de colores
             {
                 label: 'Black',
-                borderColor: 'black',
+                borderColor: 'black',// comentario
                 borderWidth: 2,
                 data: [
                     { x: 0, y: 56 },
